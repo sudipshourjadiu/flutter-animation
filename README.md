@@ -107,7 +107,54 @@ class MyApp extends StatelessWidget {
 
 ---
 
-## 🌫️ 4. AnimatedOpacity
+## 👆 4.AnimationController
+
+```dart
+import 'package:flutter/material.dart';
+
+class SimpleAnimation extends StatefulWidget {
+  @override
+  _SimpleAnimationState createState() => _SimpleAnimationState();
+}
+
+class _SimpleAnimationState extends State<SimpleAnimation> 
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _size;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true); // Automatically loops back and forth
+
+    _size = Tween<double>(begin: 100, end: 200).animate(_controller);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose(); // Prevents memory leaks
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _size,
+      builder: (context, _) => Container(
+        width: _size.value,
+        height: _size.value,
+        color: Colors.blue,
+      ),
+    );
+  }
+}
+```
+---
+
+## 🌫️ 5. AnimatedOpacity
 
 ```dart
 import 'package:flutter/material.dart';
@@ -155,7 +202,7 @@ class _MyAppState extends State<MyApp> {
 
 ---
 
-## 🚀 5. Hero Animation
+## 🚀 6. Hero Animation
 
 ```dart
 import 'package:flutter/material.dart';
@@ -200,7 +247,7 @@ class SecondScreen extends StatelessWidget {
 
 ---
 
-## 🎞️ 6. Rive Integration
+## 🎞️ 7. Rive Integration
 
 **Note:** Rive needs assets and will only work in a full Flutter project (not online editors).
 
@@ -237,7 +284,7 @@ class MyApp extends StatelessWidget {
 
 ---
 
-## ⚙️ 7. Reduced Motion (MediaQuery)
+## ⚙️ 8. Reduced Motion (MediaQuery)
 
 ```dart
 import 'package:flutter/material.dart';
